@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 function App() {
   const [firstName, setFirstName] = useState('');
@@ -29,4 +29,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

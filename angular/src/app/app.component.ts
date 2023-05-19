@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs';
 
 @Component({
@@ -21,7 +21,7 @@ import { map } from 'rxjs';
   ]
 })
 export class AppComponent {
-  form = inject(NonNullableFormBuilder).group({
+  form = inject(FormBuilder).group({
     firstName: [''],
     lastName: [''],
   });
