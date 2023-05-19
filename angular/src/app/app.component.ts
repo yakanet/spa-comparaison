@@ -1,28 +1,38 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { map } from 'rxjs';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   template: `
-    <main>
+    <main [formGroup]="form">
       <h1>Hi, please enter your name:</h1>
-      <p>First: <input [(ngModel)]="firstName" /></p>
-      <p>Last: <input [(ngModel)]="lastName" /></p>
-      <p>{{ firstName }} {{ lastName }}</p>
+      <p>First: <input formControlName="firstName" /></p>
+      <p>Last: <input formControlName="lastName" /></p>
+      <p>{{ fullName$ | async }}</p>
       <p><button (click)="reset()">Reset</button></p>
     </main>
   `,
   imports: [
-    FormsModule
+    ReactiveFormsModule,
+    AsyncPipe
   ]
 })
 export class AppComponent {
-  firstName = '';
-  lastName = '';
+  form = inject(NonNullableFormBuilder).group({
+    firstName: [''],
+    lastName: [''],
+  });
+
+  fullName$ = this.form.valueChanges
+    .pipe(map(value => value?.firstName + ' ' + value?.lastName));
 
   reset() {
-    this.firstName = '';
-    this.lastName = '';
+    this.form.reset({
+      firstName: '',
+      lastName: ''
+    });
   }
 }
