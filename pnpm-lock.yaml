@@ -138,6 +138,15 @@ importers:
         specifier: ^0.6.0
         version: 0.6.0
 
+  vanilla-customelement:
+    devDependencies:
+      vite:
+        specifier: ^4.3.2
+        version: 4.3.2
+      vite-bundle-visualizer:
+        specifier: ^0.6.0
+        version: 0.6.0
+
   vuejs:
     dependencies:
       vue:
